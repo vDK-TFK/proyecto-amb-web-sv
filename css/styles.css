@@ -14,8 +14,8 @@
   --lightblue: #ccccff;
   --box-shadow-1: 0 5px 15px rgba(0, 0, 0, 0.1);
   --box-shadow-2: 0 5px 15px rgba(255, 94, 58, 0.2);
-  --gradient: linear-gradient(to bottom, #fccb90, #ff9a9e);
-  --btn-gradient: linear-gradient(to bottom, #ff5151 50%, #ff5e3a);
+  --gradient: linear-gradient(to bottom, #eeeceb, #e9955c);
+  --btn-gradient: linear-gradient(to bottom, #dd9c8ad8 50%, #ff5e3a);
 }
 
 *,
