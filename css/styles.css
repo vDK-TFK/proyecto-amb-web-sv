@@ -248,6 +248,10 @@ img {
   right: 0;
   bottom: 0;
 }
+.info {
+    background-color: rgba(224, 120, 35, 0.15);
+    padding: 10rem 3rem 10rem;
+    margin-top: 7rem;}
 
 @media (max-width: 1600px) {
   .header .hero .row img {
