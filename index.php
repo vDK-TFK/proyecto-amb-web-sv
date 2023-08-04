@@ -29,8 +29,8 @@
     <?php require 'partials/header.php' ?>
 
     <?php if(!empty($user)): ?>
-      <br> Welcome. <?= $user['email']; ?>
-      <br>You are Successfully Logged In
+      <br> Bienvenido. <?= $user['email']; ?>
+      <br>Login exitoso
       <a href="logout.php">
         Logout
       </a>

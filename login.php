@@ -19,7 +19,7 @@
       $_SESSION['user_id'] = $results['id'];
       header("Location: /php-login");
     } else {
-      $message = 'Sorry, those credentials do not match';
+      $message = 'Credenciales incorrectas';
     }
   }
 
