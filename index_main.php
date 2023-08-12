@@ -19,7 +19,6 @@
           <div class="logo">
             <img src="./images/logo.png" alt="" />
           </div>
-
           <div class="nav-list d-flex">
             <a href="index_main.php">Inicio</a>
             <a href="categorias.html">Tienda</a>
@@ -34,7 +33,7 @@
           <div class="icons d-flex">
             <div class="icon d-flex"><i class="bx bx-search"></i></div>
             <div class="icon user-icon d-flex">
-              <i class="bx bx-user"><a href="index.php">LOGIN</a></i>
+              <i class="bx bx-user"><a href="index.php">Login</a></i>
             </div>
             <div class="icon d-flex">
               <i class="bx bx-bell"></i>
