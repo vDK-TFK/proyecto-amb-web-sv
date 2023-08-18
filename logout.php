@@ -1,9 +1,12 @@
 <?php
-  session_start();
+session_start();
 
-  session_unset();
+// Mensaje para notificar que la sesión ha sido cerrada con éxito
+$_SESSION['logout_message'] = 'Sesión cerrada con éxito';
 
-  session_destroy();
-
-  header('Location: /php-login');
+// Destruir la sesión y redirigir al formulario de login de sesión
+session_unset();
+session_destroy();
+header('Location: login.php');
+exit;
 ?>

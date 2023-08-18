@@ -1,52 +1,76 @@
 <?php
+require_once 'conexion.php';
 
-  session_start();
+// Mensajes de error y éxito
+$logout_message = '';
+$error_message = '';
 
-  if (isset($_SESSION['user_id'])) {
-    header('Location: /php-login');
-  }
-  require 'database.php';
+if (isset($_SESSION['logout_message'])) {
+    $logout_message = $_SESSION['logout_message'];
+    unset($_SESSION['logout_message']);
+}
 
-  if (!empty($_POST['email']) && !empty($_POST['password'])) {
-    $records = $conn->prepare('SELECT id, email, password FROM users WHERE email = :email');
-    $records->bindParam(':email', $_POST['email']);
-    $records->execute();
-    $results = $records->fetch(PDO::FETCH_ASSOC);
+// Procesar el formulario cuando se envíe
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-    $message = '';
+    // Obtener el usuario de la base de datos
+    $sql = "SELECT * FROM usuarios WHERE email = '$email'";
+    $result = $conexion->query($sql);
 
-    if (count($results) > 0 && password_verify($_POST['password'], $results['password'])) {
-      $_SESSION['user_id'] = $results['id'];
-      header("Location: /php-login");
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+        if (password_verify($password, $user['password'])) {
+            // Inicio de sesión exitoso. Redirigir al usuario a la página de inicio después del login
+            header('Location: index.php');
+            exit;
+        } else {
+            $error_message = "Contraseña incorrecta.";
+        }
     } else {
-      $message = 'Credenciales incorrectas';
+        $error_message = "Usuario no encontrado.";
     }
-  }
-
+}
 ?>
 
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Login</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
-  </head>
-  <body>
-    <?php require 'partials/header.php' ?>
+<head>
+    <title>Iniciar sesión</title>
+    <!-- Con Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-3">
+        <h2>Iniciar sesión</h2>
+        <?php if ($error_message !== ''): ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $error_message; ?>
+            </div>
+        <?php endif; ?>
 
-    <?php if(!empty($message)): ?>
-      <p> <?= $message ?></p>
-    <?php endif; ?>
+        <form action="login.php" method="post">
+            <div class="form-group">
+                <label for="email">Ingrese su Correo:</label>
+                <input type="email" class="form-control <?php if ($error_message !== '') echo 'is-invalid'; ?>" id="email" name="email" required>
+            </div>
 
-    <h1>Login</h1>
-    <span>or <a href="signup.php">SignUp</a></span>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" class="form-control <?php if ($error_message !== '') echo 'is-invalid'; ?>" id="password" name="password" required>
+            </div>
 
-    <form action="login.php" method="POST">
-      <input name="email" type="text" placeholder="Enter your email">
-      <input name="password" type="password" placeholder="Enter your Password">
-      <input type="submit" value="Submit">
-    </form>
-  </body>
+            <button type="submit" class="btn btn-success">Iniciar sesión</button>
+        </form>
+
+        <form action="new_user.php" method="post">
+            <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+    </div>
+
+    <!-- Agregar Bootstrap JS and jQuery scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>
