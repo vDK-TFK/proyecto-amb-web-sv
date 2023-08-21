@@ -1,6 +1,15 @@
 <?php
-//  session_start();
-//  require_once 'conexion.php';
+// session_start();
+// require_once 'conexion.php';
+// $actualsesion = $_SESSION['usuario'];
+
+// if($actualsesion == null || $actualsesion == ''){
+
+//     echo 'acceso denegado';
+//     die();
+// }
+
+
 //  if (isset($_SESSION['usuario'])) {
 //    $username = $_SESSION['usuario'];
 //  } else {
@@ -44,7 +53,7 @@
             <img src="./images/logo.png" alt="" />
           </div>
           <div class="nav-list d-flex">
-            <a href="index_main.php">Inicio</a>
+            <a href="index.php">Inicio</a>
             <a href="categorias.html">Tienda</a>
             <a href="">Carrito</a>
             <a href="info.html">Sobre nosotros</a>
@@ -57,7 +66,7 @@
           <div class="icons d-flex">
             <div class="icon d-flex"><i class="bx bx-search"></i></div>
             <div class="icon user-icon d-flex">
-              <i class="bx bx-user"><a href="index.php">Login</a></i>
+              <i class="bx bx-user"></i>
             </div>
             <div class="icon d-flex">
               <i class="bx bx-bell"></i>
