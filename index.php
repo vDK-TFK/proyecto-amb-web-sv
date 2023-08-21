@@ -1,34 +1,8 @@
 <?php
-// session_start();
-// require_once 'conexion.php';
-// $actualsesion = $_SESSION['usuario'];
 
-// if($actualsesion == null || $actualsesion == ''){
+session_start();
+require_once 'conexion.php';
 
-//     echo 'acceso denegado';
-//     die();
-// }
-
-
-//  if (isset($_SESSION['usuario'])) {
-//    $username = $_SESSION['usuario'];
-//  } else {
-//     header('Location: index.php');
-//    exit;
-//  }
-
-// if (isset($_SESSION['usuario'])) {
-//   $usuario = $conn->prepare('SELECT id, email, password, usuario FROM usuarios WHERE id = :id');
-//   $records->bindParam(':id', $_SESSION['usuario']);
-//   $records->execute();
-//   $result = $usuario->fetch(PDO::FETCH_ASSOC);
-
-//   $user = null;
-
-//   if (count($result) > 0) {
-//     $user = $result;
-//   }
-// }
 
 ?>
 <!DOCTYPE html>
@@ -66,7 +40,7 @@
           <div class="icons d-flex">
             <div class="icon d-flex"><i class="bx bx-search"></i></div>
             <div class="icon user-icon d-flex">
-              <i class="bx bx-user"></i>
+              <i class="bx bx-user"><?php echo $username?></i>
             </div>
             <div class="icon d-flex">
               <i class="bx bx-bell"></i>
