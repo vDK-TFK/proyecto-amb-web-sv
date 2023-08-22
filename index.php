@@ -3,6 +3,11 @@
 session_start();
 require_once 'conexion.php';
 
+$_SESSION['sessCustomerID'] = 1;
+
+$query = $conexion->query("SELECT * FROM usuarios WHERE id = " . $_SESSION['sessCustomerID']);
+$custRow = $query->fetch_assoc();
+
 
 ?>
 <!DOCTYPE html>
@@ -38,14 +43,14 @@ require_once 'conexion.php';
           </div>
 
           <div class="icons d-flex">
-            <div class="icon d-flex"><i class="bx bx-search"></i></div>
+            <!-- <div class="icon d-flex"><i class="bx bx-search"></i></div> -->
             <div class="icon user-icon d-flex">
-              <i class="bx bx-user"><?php echo $username?></i>
+              <i class="bx bx-user"><?php echo $custRow['usuario']; ?></i>
             </div>
-            <div class="icon d-flex">
+            <!-- <div class="icon d-flex">
               <i class="bx bx-bell"></i>
               <span></span>
-            </div>
+            </div> -->
           </div>
 
           <!-- Hamburger -->
