@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+require_once 'conexion.php';
+
+$_SESSION['sessCustomerID'] = 1;
+
+$query = $conexion->query("SELECT * FROM usuarios WHERE id = " . $_SESSION['sessCustomerID']);
+$custRow = $query->fetch_assoc();
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,8 +35,8 @@
 
           <div class="nav-list d-flex">
             <a href="index.php">Inicio</a>
-            <a href="categorias.html">Tienda</a>
-            <a href="">Carrito</a>
+            <a href="categorias.php">Tienda</a>
+            <a href="VerCarta.php">Carrito</a>
             <a href="info.html">Sobre nosotros</a>
             <div class="close">
               <i class="bx bx-x"></i>
@@ -32,12 +45,12 @@
           </div>
 
           <div class="icons d-flex">
-            <div class="icon d-flex"><i class="bx bx-search"></i></div>
+            <!-- <div class="icon d-flex"><i class="bx bx-search"></i></div> -->
             <div class="icon user-icon d-flex">
-              <i class="bx bx-user"></i>
+              <i class="bx bx-user"><?php echo $custRow['usuario']; ?></i>
             </div>
-            <div class="icon d-flex">
-              <i class="bx bx-bell"></i>
+            <!-- <div class="icon d-flex"> -->
+              <!-- <i class="bx bx-bell"></i> -->
               <span></span>
             </div>
           </div>
@@ -57,27 +70,38 @@
         <h2>Nuestra coleccion</h2>
       </div>
       <div class="filters d-flex">
-        <div data-filter="Mujeres">Mujer</div>
-        <div data-filter="Niños">Niños</div>
-        <div data-filter="Hombres">Hombre</div>
-        <div data-filter="Accesorios">Accesorios</div>
+        <a href="cat_mujer.php"><div data-filter="Mujeres">Mujer</div></a>
+        <a href="cat_niño.php"><div data-filter="Niños">Niños</div></a>
+        <a href="cat_hombre.php"><div data-filter="Hombres">Hombre</div></a>
+        <!-- <div data-filter="Accesorios">Accesorios</div> -->
       </div>
 
-      <div class="products container">
+      <?php
+    //get rows query
+    $query = $conexion->query("SELECT * FROM pro_hombre ORDER BY id DESC LIMIT 10");
+    if ($query->num_rows > 0) {
+        while ($row = $query->fetch_assoc()) {
+    ?>
+        <div class="products container">
         <div class="swiper mySwiper">
           <div class="swiper-wrapper" id="products">
             <div class="swiper-slide">
                <div class="product">
                 <div class="top d-flex">
-                  <img src="./images/product-1.png" alt="" />
+                  <!-- <img src="./images/product-1.png" alt="" /> -->
+                  <img src="data:image;base64,<?php echo base64_encode($row["imagen"]); ?>" >
                   <div class="icon d-flex">
                     <i class="bx bxs-heart"></i>
                   </div>
                 </div>
                 <div class="bottom">
-                  <h4>Hoodie Nike Air Cabellero - Hoodie importado rojo</h4>
+                  <h4><?php echo $row["nombre"]; ?></h4>
+                  <p style="font-size: x-large;"><?php echo $row["descripcion"]; ?></p><br><br>
                   <div class="d-flex">
-                    <div class="price">₡60000</div>
+                    <div class="price"><?php echo '$' . $row["precio"] . ' ₡'; ?></div><br>
+                    <div class="price">
+                    <a class="btn btn-success" href="AccionCarta.php?action=addToCart&id=<?php echo $row["id"]; ?>">Enviar al Carrito</a>
+                    </div>
                     <div class="rating">
                       <i class="bx bxs-star"></i>
                       <i class="bx bxs-star"></i>
@@ -91,7 +115,18 @@
             </div>
           </div>
         </div>
-        <div class="pagination">
+    </div>
+    <?php
+        }
+    } else {
+    ?>
+        <p>Producto(s) no existe.....</p>
+    <?php
+    }
+    ?>
+
+    
+        <!-- <div class="pagination">
           <div class="custom-pagination"></div>
         </div>
       </div>
@@ -122,5 +157,5 @@
               </div> 
             </div>
           </div>
-        </div>
+        </div> -->
     </section>

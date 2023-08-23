@@ -33,9 +33,9 @@ $custRow = $query->fetch_assoc();
           </div>
           <div class="nav-list d-flex">
             <a href="index.php">Inicio</a>
-            <a href="categorias.html">Tienda</a>
-            <a href="">Carrito</a>
-            <a href="info.html">Sobre nosotros</a>
+            <a href="categorias.php">Tienda</a>
+            <a href="VerCarta.php">Carrito</a>
+            <a href="info.php">Sobre nosotros</a>
             <div class="close">
               <i class="bx bx-x"></i>
             </div>
@@ -46,11 +46,11 @@ $custRow = $query->fetch_assoc();
             <!-- <div class="icon d-flex"><i class="bx bx-search"></i></div> -->
             <div class="icon user-icon d-flex">
               <i class="bx bx-user"><?php echo $custRow['usuario']; ?></i>
+              
             </div>
-            <!-- <div class="icon d-flex">
-              <i class="bx bx-bell"></i>
-              <span></span>
-            </div> -->
+            <div class="icon d-flex">
+            <i class='bx bx-exit'><a href="login.php">logout</a></i>
+            </div>
           </div>
 
           <!-- Hamburger -->
@@ -68,7 +68,7 @@ $custRow = $query->fetch_assoc();
             <h1>Sincron<span class="i">i</span>as</h1>
             <p>COMPRAR CALIDAD CON COMODIDAD</p>
 
-            <button class="btn">Explora más!</button>
+            <!-- <button class="btn">Explora más!</button> -->
           </div>
           <img src="./images/woman-in-cart.png" alt="" />
         </div>
@@ -81,10 +81,10 @@ $custRow = $query->fetch_assoc();
         <h2>Nuestra coleccion</h2>
       </div>
       <div class="filters d-flex">
-        <div data-filter="Mujeres">Mujer</div>
-        <div data-filter="Niños">Niños</div>
-        <div data-filter="Hombres"><a href="categorias.html">Hombre</a></div>
-        <div data-filter="Accesorios">Accesorios</div>
+        <a href="cat_mujer.php"><div data-filter="Mujeres">Mujer</div></a>
+        <a href="cat_niño.php"><div data-filter="Niños">Niños</div></a>
+        <a href="cat_hombre.php"><div data-filter="Hombres">Hombres</div></a>
+        <!-- <div data-filter="Accesorios">Accesorios</div> -->
       </div>
       <!--Ropa para bebe-->
       <div class="products container">
@@ -101,7 +101,7 @@ $custRow = $query->fetch_assoc();
                 <div class="bottom">
                   <h4>Ropa para Bebe </h4>
                   <div class="d-flex">
-                    <div class="price">Ver mas</div>
+                    <!-- <div class="price">Ver mas</div> -->
                     <div class="rating">
                       <i class="bx bxs-star"></i>
                       <i class="bx bxs-star"></i>
@@ -134,7 +134,7 @@ $custRow = $query->fetch_assoc();
                 <div class="bottom">
                   <h4>Ropa para Mujer </h4>
                   <div class="d-flex">
-                    <div class="price">Ver mas</div>
+                    <!-- <div class="price">Ver mas</div> -->
                     <div class="rating">
                       <i class="bx bxs-star"></i>
                       <i class="bx bxs-star"></i>
@@ -167,7 +167,7 @@ $custRow = $query->fetch_assoc();
                 <div class="bottom">
                   <h4>Ropa para Hombre </h4>
                   <div class="d-flex">
-                    <div class="price"> <a href="categorias.html">Ver mas</a></div>
+                    <!-- <div class="price"> <a href="categorias.html">Ver mas</a></div> -->
                     <div class="rating">
                       <i class="bx bxs-star"></i>
                       <i class="bx bxs-star"></i>
@@ -188,7 +188,7 @@ $custRow = $query->fetch_assoc();
     </section>
 
     <!-- ====== New Arrival ====== -->
-    <section class="section new-arrival">
+    <!-- <section class="section new-arrival">
       <div class="title">
         <span>NUEVA LLEGADA</span>
         <h2>Ultima Coleccion</h2>
@@ -218,10 +218,10 @@ $custRow = $query->fetch_assoc();
           </h3>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <!-- ====== Categories ====== -->
-    <section class="section categories">
+    <!-- <section class="section categories">
       <div class="title">
         <span>CATALOGO</span>
         <h2>2023 última colección</h2>
@@ -257,7 +257,7 @@ $custRow = $query->fetch_assoc();
       <div class="button d-flex">
         <a class="btn loadmore">Cargar más</a>
       </div>
-    </section>
+    </section> -->
 
     <!-- ====== Statistics ====== -->
     <section class="section statistics">
@@ -332,15 +332,15 @@ $custRow = $query->fetch_assoc();
             <h4>Categoria</h4>
             <a href="">Caballeros</a>
             <a href="">Damas</a>
-            <a href="">Niños</a>
-            <a href="">Accesorios</a>
+            <!-- <a href="">Niños</a>
+            <a href="">Accesorios</a> -->
           </div>
           <div>
             <h4>Mi Cuenta</h4>
             <a href="">Mi Perfil</a>
-            <a href="">Desconectarse</a>
+            <!-- <a href="">Desconectarse</a>
             <a href="">Historial de ordenes</a>
-            <a href="">Rastreo de orden</a>
+            <a href="">Rastreo de orden</a> -->
           </div>
           <div>
             <h4>Contactanos</h4>

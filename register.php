@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = $_POST['usuario'];
     $email = $_POST['email'];
     // Encriptar la contraseña con la funsion HASH
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); 
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     // Insertar los datos en la tabla de usuarios
     $sql = "INSERT INTO usuarios (usuario, email, password) VALUES ('$usuario', '$email', '$password')";

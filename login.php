@@ -15,21 +15,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Obtener el usuario de la base de datos
+    // Verificar las credenciales para usuarios normales
     $sql = "SELECT * FROM usuarios WHERE email = '$email'";
     $result = $conexion->query($sql);
 
     if ($result->num_rows === 1) {
         $user = $result->fetch_assoc();
         if (password_verify($password, $user['password'])) {
-            // Inicio de sesión exitoso. Redirigir al usuario a la página de inicio después del login
+            // Inicio de sesión exitoso para usuarios normales
             header('Location: index.php');
             exit;
         } else {
             $error_message = "Contraseña incorrecta.";
         }
     } else {
-        $error_message = "Usuario no encontrado.";
+        // Si no se encontró el usuario en la tabla "usuarios", verificar en la tabla "admin"
+        $sql_admin = "SELECT * FROM user WHERE correo = '$email' AND password = '$password'";
+        $result_admin = $conexion->query($sql_admin);
+
+        if ($result_admin->num_rows === 1) {
+            // Inicio de sesión exitoso para administradores
+            header('Location: admin/ProyectoBaseDatos/index.php');
+            exit;
+        } else {
+            $error_message = "Usuario no encontrado o contraseña incorrecta.";
+        }
     }
 }
 ?>
