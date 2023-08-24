@@ -10,7 +10,7 @@
         <h2 class="mt-4">Registro de Usuario</h2>
         <form action="register.php" method="post">
             <div class="form-group">
-                <label for="nombre">Usuario:</label>
+                <label for="usuario">Usuario:</label>
                 <input type="text" class="form-control" id="usuario" name="usuario" required>
             </div>
 
@@ -24,6 +24,16 @@
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
 
+            <div class="form-group">
+                <label for="phone">Teléfono:</label>
+                <input type="text" class="form-control" id="phone" name="phone">
+            </div>
+
+            <div class="form-group">
+                <label for="address">Dirección:</label>
+                <input type="text" class="form-control" id="address" name="address">
+            </div>
+
             <button type="submit" class="btn btn-primary">Registrarse</button>
             <a href="login.php" class="btn btn-secondary">Volver</a>
 
@@ -35,4 +45,3 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-

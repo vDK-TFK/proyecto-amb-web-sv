@@ -36,12 +36,12 @@
           <h6 class="text-uppercase fw-bold mb-4">
             Contactanos en:
           </h6>
-          <p><i class="fas fa-home me-3"></i> Cancún, Quintana Roo CP 77852</p>
+          <p><i class="fas fa-home me-3"></i> Av 2, Calle 28, Santa Jose, Costa Rica</p>
           <p>
             <i class="fas fa-envelope me-3"></i>
             Información@gmail.com
           </p>
-          <p><i class="fas fa-phone me-3"></i> +52 1234567890</p>
+          <p><i class="fas fa-phone me-3"></i> +506 2456 3458</p>
         </div>
       </div>
     </div>

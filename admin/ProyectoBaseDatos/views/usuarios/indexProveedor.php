@@ -21,14 +21,15 @@
 <tr>
 <th>Codigo</th>
 <th>Nombre</th>
-<th>Producto</th>
-<th>Empresa</th>
-<th>Precio</th>
+<th>Ubicacion</th>
+<th>Productos</th>
 <th>Cantidad</th>
+<th>Fecha</th>
+<!-- <th>Cantidad</th>
 <th>Cantidad minima</th>
 <th>Categorias</th>
 <th>Imagen</th>
-<th>Acciones</th>
+<th>Acciones</th> -->
 
 
 </tr>
@@ -45,7 +46,7 @@ if($proveedores -> num_rows > 0){
 foreach($proveedores as $key => $row ){
 ?>
 <!--funcion y estilos para celdas en error-->
-<?php
+<!-- <?php
 
 if ($row['cantidad'] <= $row['cantidad_min']) {
   $color = '#F78E8E';
@@ -54,9 +55,9 @@ if ($row['cantidad'] <= $row['cantidad_min']) {
   $clase = 'correcto';
 }
  
-// ...
 
-?>
+
+?> -->
 <style>
       .problema{
         background-color: <?php echo $color?>;
@@ -67,18 +68,19 @@ if ($row['cantidad'] <= $row['cantidad_min']) {
 <tr>
 <td <?php echo  'class="'.$row['categorias'] .'"'; ?>><?php echo $row['id']; ?></td>
 <td><?php echo $row['nombre']; ?></td>
-<td><?php echo $row['descripcion']; ?></td>
-<td><?php echo $row['color']; ?></td>
-<td><?php echo $row['precio']; ?>$</td>
+<td><?php echo $row['ubicacion']; ?></td>
+<td><?php echo $row['productos']; ?></td>
+<td><?php echo $row['cantidad']; ?></td>
+<td><?php echo $row['fecha']; ?></td>
 
 
 
-<td <?php echo  'class="'.$clase .'"'; ?>><?php echo $row['cantidad']; ?></td>
+<!-- <td <?php echo  'class="'.$clase .'"'; ?>><?php echo $row['cantidad']; ?></td>
 <td><?php echo $row['cantidad_min']; ?></td>
 
 
 <td><?php echo $row['categorias']; ?></td>
-<td><img width="100" src="data:image;base64,<?php echo base64_encode($row['imagen']);  ?>" ></td>
+<td><img width="100" src="data:image;base64,<?php echo base64_encode($row['imagen']);  ?>" ></td> -->
 
 <td>
   <a href="proveedor_editar.php?id=<?php echo $row['id']?>">

@@ -332,8 +332,8 @@ $custRow = $query->fetch_assoc();
             <h4>Categoria</h4>
             <a href="">Caballeros</a>
             <a href="">Damas</a>
-            <!-- <a href="">Niños</a>
-            <a href="">Accesorios</a> -->
+            <a href="">Niños</a>
+            <!-- <a href="">Accesorios</a> -->
           </div>
           <div>
             <h4>Mi Cuenta</h4>

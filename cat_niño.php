@@ -71,7 +71,7 @@ $custRow = $query->fetch_assoc();
       </div>
       <div class="filters d-flex">
         <a href="cat_mujer.php"><div data-filter="Mujeres">Mujer</div></a>
-        <a href="cat_niño.php"><div data-filter="Niños">Niños</div></a>
+        <a href="cat_niño.php"><div data-filter="Niños" class="active">Niños</div></a>
         <a href="cat_hombre.php"><div data-filter="Hombres">Hombre</div></a>
         <!-- <div data-filter="Accesorios">Accesorios</div> -->
       </div>
@@ -159,3 +159,66 @@ $custRow = $query->fetch_assoc();
           </div>
         </div> -->
     </section>
+
+    <footer class="footer">
+      <div class="row container">
+        <div class="col">
+          <div class="logo d-flex">
+            <img src="./images/logo.png" alt="logo" />
+          </div>
+          <p>
+            Lorem ispum is a placeholder text <br />
+            commonly used as a free text.
+          </p>
+          <div class="icons d-flex">
+            <div class="icon d-flex">
+              <i class="bx bxl-facebook"></i>
+            </div>
+            <div class="icon d-flex"><i class="bx bxl-twitter"></i></div>
+            <div class="icon d-flex"><i class="bx bxl-instagram"></i></div>
+            <div class="icon d-flex"><i class="bx bxl-youtube"></i></div>
+          </div>
+          <p class="color">
+            Copyrights 2023 <br />
+            @sincronias
+          </p>
+        </div>
+        <div class="col">
+          <div>
+            <h4>Producto</h4>
+            <a href="">Precios</a>
+            <a href="">Categorias</a>
+          </div>
+          <div>
+            <h4>Categoria</h4>
+            <a href="">Caballeros</a>
+            <a href="">Damas</a>
+            <a href="">Niños</a>
+            <!-- <a href="">Accesorios</a> -->
+          </div>
+          <div>
+            <h4>Mi Cuenta</h4>
+            <a href="">Mi Perfil</a>
+            <!-- <a href="">Desconectarse</a>
+            <a href="">Historial de ordenes</a>
+            <a href="">Rastreo de orden</a> -->
+          </div>
+          <div>
+            <h4>Contactanos</h4>
+            <div class="d-flex">
+              <div class="icon"><i class="bx bxs-map"></i></div>
+              <span>Av 2, Calle 28, Santa Jose, Costa Rica</span>
+            </div>
+            <div class="d-flex">
+              <div class="icon"><i class="bx bxs-envelope"></i></div>
+              <span>info@sincronias.com</span>
+            </div>
+            <div class="d-flex">
+              <div class="icon"><i class="bx bxs-phone"></i></div>
+              <span>+506 8978 9001</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+</body>

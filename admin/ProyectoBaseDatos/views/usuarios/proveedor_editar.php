@@ -29,7 +29,7 @@ $productos = mysqli_fetch_assoc($resultado);
 <div class="col-sm-6">
 <div class="mb-3">
 <label for="descripcion" class="form-label">Productos *</label>
-<input type="text"  id="descripcion" name="descripcion" value="<?php echo $productos ['descripcion']; ?>" class="form-control" required>
+<input type="text"  id="ubicacion" name="ubicacion" value="<?php echo $productos ['ubicacion']; ?>" class="form-control" required>
 </div>
 </div>
 </div>
@@ -38,19 +38,26 @@ $productos = mysqli_fetch_assoc($resultado);
 <div class="col-sm-6">
 <div class="mb-3">
 <label for="color" class="form-label">Empresa *</label>
-<input type="text"  id="color" name="color" value="<?php echo $productos ['color']; ?>"  class="form-control" required>
+<input type="text"  id="productos" name="productos" value="<?php echo $productos ['productos']; ?>"  class="form-control" required>
 </div>
 </div>
 
 <div class="col-sm-6">
 <div class="mb-3">
 <label for="precio" class="form-label">Precio *</label>
-<input type="number"  id="precio" name="precio"  value="<?php echo $productos ['precio']; ?>" class="form-control" required>
+<input type="number"  id="cantidad" name="cantidad"  value="<?php echo $productos ['cantidad']; ?>" class="form-control" required>
 </div>
 </div>
 </div>
 
-<div class="row">
+<div class="col-sm-6">
+<div class="mb-3">
+<label for="precio" class="form-label">Fecha de ingreso</label>
+<input type="date"  id="fecha" name="fecha"  value="<?php echo $productos ['fecha']; ?>" class="form-control" required>
+</div>
+</div>
+
+<!-- <div class="row">
 <div class="col-sm-6">
 <div class="mb-3">
 <label for="cantidad" class="form-label">Cantidad *</label>
@@ -81,7 +88,7 @@ $productos = mysqli_fetch_assoc($resultado);
   </select>
     </div>   
 </div>
-</div>
+</div> 
 <div class="mb-3">
 <div class="row">
         <div class="col-sm-12">
@@ -90,7 +97,7 @@ $productos = mysqli_fetch_assoc($resultado);
             </div>
         </div>
     </div>
-</div>
+</div>-->
 
 <div class="mb-3">
 <input type="hidden" name="accion" value="editar_proveedor">

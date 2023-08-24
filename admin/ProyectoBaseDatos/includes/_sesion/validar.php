@@ -1,31 +1,50 @@
 <?php
-require_once("../_db.php");
-$correo = $_POST['correo'];
-$password = $_POST['password'];
+
+/**
+ * Validacion de datos para poder iniciar sesion
+ */
+require_once ("../_db.php");
+$correo=$_POST['correo'];
+$password=$_POST['password'];
 session_start();
-$_SESSION['correo'] = $correo;
+$_SESSION['correo']=$correo;
 
-$conexion = mysqli_connect("localhost", "root", "", "sincronias");
-$consulta = "SELECT * FROM user WHERE correo='$correo' AND password='$password'";
-$resultado = mysqli_query($conexion, $consulta);
-$filas = mysqli_num_rows($resultado);
 
-if ($filas) {
+$conexion=mysqli_connect("localhost","root","","sincronias");
+$consulta="SELECT*FROM user where correo='$correo' and password='$password'";
+$resultado=mysqli_query($conexion,$consulta);
+$filas=mysqli_num_rows($resultado);
+
+if($filas){
+  
     header('Location: ../../views/usuarios/index.php');
-} else {
-    $email = $correo;
-    // Verificar en la tabla "usuarios"
-    $consultaUsuarios = "SELECT * FROM usuarios WHERE email='$email'";
-    $resultadoUsuarios = mysqli_query($conexion, $consultaUsuarios);
-    $filasUsuarios = mysqli_num_rows($resultadoUsuarios);
 
-    if ($filasUsuarios) {
-        header('Location: /index.php');
-    } else {
-        header('Location: /login_error.php'); // Redirige a una página de error de inicio de sesión
-        session_destroy();
-    }
+
+}else{
+    
+    header('location: ../../index.php');
+    session_destroy();
 }
+?>
+  
+  <?php
 
-mysqli_close($conexion);
+  /**
+   * Parte de registro de usuarios
+   */
+ if(isset ($_POST['registrar'])){
+if (strlen($_POST['nombre']) >= 1 && strlen($_POST['correo']) >= 1 && strlen($_POST['password']) >= 1 && strlen($_POST['telefono']) >= 1) {
+$nombre = trim($_POST['nombre']);
+      $correo = trim($_POST['correo']);
+      $password = trim($_POST['password']);
+      $telefono = trim($_POST['telefono']);
+
+      $consulta = "INSERT INTO user (nombre, correo, telefono, password)
+      VALUES ('$nombre', '$correo', '$telefono', '$password')";
+
+     mysqli_query($conexion, $consulta);
+     mysqli_close($conexion);
+
+ }
+}
 ?>

@@ -73,12 +73,12 @@ $custRow = $query->fetch_assoc();
 <div class="sidebar-heading">
     PERFIL
 </div>
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a class="nav-link collapsed" href="usuariosindex.php">
         <span class="material-icons">people</span>
         <span>Información usuario</span>
     </a>
-</li>
+</li> -->
 <li class="nav-item">
     <a class="nav-link" href="../../includes/_sesion/cerrarSesion.php">
     <span class="material-icons">logout</span>

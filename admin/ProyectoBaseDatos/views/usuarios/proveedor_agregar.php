@@ -18,8 +18,8 @@
 
 <div class="col-sm-6">
 <div class="mb-3">
-<label for="descripcion" class="form-label">Producto *</label>
-<input type="text"  id="descripcion" name="descripcion" class="form-control" required >
+<label for="descripcion" class="form-label">Ubicacion *</label>
+<input type="text"  id="ubicacion" name="ubicacion" class="form-control" required >
 </div>
 </div>
 </div>
@@ -27,20 +27,27 @@
 <div class="row">
 <div class="col-sm-6">
 <div class="mb-3">
-<label for="color" class="form-label">Empresa *</label>
-<input type="text"  id="color" name="color" class="form-control" required>
+<label for="color" class="form-label">Productos *</label>
+<input type="text"  id="productos" name="productos" class="form-control" required>
 </div>
 </div>
 
 <div class="col-sm-6">
 <div class="mb-3">
-<label for="precio" class="form-label">Precio *</label>
-<input type="number"  id="precio" name="precio" class="form-control" required>
+<label for="precio" class="form-label">Cantidad *</label>
+<input type="number"  id="cantidad" name="cantidad" class="form-control" required>
 </div>
 </div>
 </div>
 
-<div class="row">
+<div class="col-sm-6">
+<div class="mb-3">
+<label for="precio" class="form-label">fecha de ingreso *</label>
+<input type="date"  id="fecha" name="fecha" class="form-control" required>
+</div>
+</div>
+
+<!-- <div class="row">
 <div class="col-sm-6">
 <div class="mb-3">
 <label for="cantidad" class="form-label">Cantidad *</label>
@@ -80,7 +87,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="mb-3">
 <input type="hidden" name="accion" value="insertar_proveedor">

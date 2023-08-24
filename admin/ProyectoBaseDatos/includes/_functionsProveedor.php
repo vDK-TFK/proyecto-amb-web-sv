@@ -5,16 +5,16 @@ require_once ("_db.php");
 
 if(isset($_POST['accion'])){ 
     switch($_POST['accion']){
-        case 'eliminar_producto':
+        case 'eliminar_proveedor':
             eliminar_producto();
 
         break;        
-        case 'editar_producto':
+        case 'editar_proveedor':
         editar_producto();
 
         break;
 
-        case 'insertar_productos':
+        case 'insertar_proveedor':
         insertar_productos();
 
         break;    
@@ -28,24 +28,24 @@ function insertar_productos(){
     extract($_POST);
 
 
-        //variables donde se almacenan los valores de nuestra imagen
-                $tamanoArchvio=$_FILES['foto']['size'];
+    //     //variables donde se almacenan los valores de nuestra imagen
+    //             $tamanoArchvio=$_FILES['foto']['size'];
     
-        //se realiza la lectura de la imagen
-                $imagenSubida=fopen($_FILES['foto']['tmp_name'], 'r');
-                $binariosImagen=fread($imagenSubida,$tamanoArchvio);   
-        //se realiza la consulta correspondiente para guardar los datos
+    //     //se realiza la lectura de la imagen
+    //             $imagenSubida=fopen($_FILES['foto']['tmp_name'], 'r');
+    //             $binariosImagen=fread($imagenSubida,$tamanoArchvio);   
+    //     //se realiza la consulta correspondiente para guardar los datos
         
-        $imagenFin =mysqli_escape_string($conexion,$binariosImagen);
+    //     $imagenFin =mysqli_escape_string($conexion,$binariosImagen);
                 
 
 
-    $consulta="INSERT INTO proveedores (nombre, descripcion, color, precio, cantidad, cantidad_min, categorias, imagen)
-    VALUES ('$nombre', '$descripcion', '$color', $precio, $cantidad ,$cantidad_min, '$categorias', '$imagenFin');" ;
+    $consulta="INSERT INTO proveedores (nombre, ubicacion, productos, cantidad, fecha)
+    VALUES ('$nombre', '$ubicacion', '$productos', $cantidad, '$fecha');" ;
 
     mysqli_query($conexion, $consulta);
     
-    header("Location: ../views/usuarios/");
+    header("Location: ../views/usuarios/indexProveedor.php");
 
 }
 function editar_producto(){
@@ -54,19 +54,19 @@ function editar_producto(){
     extract($_POST);
 
 
-        //variables donde se almacenan los valores de nuestra imagen
-                $tamanoArchvio=$_FILES['foto']['size'];
-        //se realiza la lectura de la imagen
-                $imagenSubida=fopen($_FILES['foto']['tmp_name'], 'r');
-                $binariosImagen=fread($imagenSubida,$tamanoArchvio);   
-        //se realiza la consulta correspondiente para guardar los datos
+    //     //variables donde se almacenan los valores de nuestra imagen
+    //             $tamanoArchvio=$_FILES['foto']['size'];
+    //     //se realiza la lectura de la imagen
+    //             $imagenSubida=fopen($_FILES['foto']['tmp_name'], 'r');
+    //             $binariosImagen=fread($imagenSubida,$tamanoArchvio);   
+    //     //se realiza la consulta correspondiente para guardar los datos
         
-        $imagenFin =mysqli_escape_string($conexion,$binariosImagen);
+    //     $imagenFin =mysqli_escape_string($conexion,$binariosImagen);
                 
-    $consulta="UPDATE proveedores SET nombre = '$nombre', descripcion = '$descripcion', color = '$color', precio = '$precio', cantidad = '$cantidad', categorias = '$categorias', imagen = '$imagenFin' WHERE id = $id";
+    $consulta="UPDATE proveedores SET nombre = '$nombre', ubicacion = '$ubicacion', productos = '$productos', cantidad = $cantidad, fecha = '$fecha' WHERE id = $id";
 
     mysqli_query($conexion, $consulta);
-    header("Location: ../views/usuarios/");
+    header("Location: ../views/usuarios/indexProveedor.php");
 }
 function eliminar_producto(){
 
@@ -75,6 +75,6 @@ function eliminar_producto(){
     $id = $_POST['id'];
     $consulta = "DELETE FROM proveedores WHERE id = $id";
     mysqli_query($conexion, $consulta);
-    header("Location: ../views/usuarios/");
+    header("Location: ../views/usuarios/indexProveedor.php");
 }
 ?>

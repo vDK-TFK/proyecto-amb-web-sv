@@ -9,11 +9,13 @@ $mensajeExito = $mensajeError = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = $_POST['usuario'];
     $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $address = $_POST['address'];
     // Encriptar la contraseña con la funsion HASH
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     // Insertar los datos en la tabla de usuarios
-    $sql = "INSERT INTO usuarios (usuario, email, password) VALUES ('$usuario', '$email', '$password')";
+    $sql = "INSERT INTO usuarios (usuario, email, password, phone, address) VALUES ('$usuario', '$email', '$password', '$phone', '$address')";
 
     if ($conexion->query($sql) === TRUE) {
         $mensajeExito = "Registro Exitoso del Usuario.";

@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <button type="submit" class="btn btn-success">Iniciar sesión</button>
-        </form>
+        </form><br>
 
         <form action="new_user.php" method="post">
             <button type="submit" class="btn btn-primary">Registrar</button>

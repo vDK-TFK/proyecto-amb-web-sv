@@ -9,6 +9,14 @@ if(isset($_POST['accion'])){
             eliminar_producto();
 
         break;        
+        case 'eliminar_pro_hombre':
+            eliminar_pro_hombre();
+
+        break;        
+        case 'eliminar_pro_niño':
+            eliminar_pro_niño();
+
+        break;        
         case 'editar_producto':
         editar_producto();
 
@@ -109,37 +117,68 @@ function editar_producto(){
 }
 
 function eliminar_producto(){
+
     global $conexion;
     extract($_POST);
-    
-    $categorias = $_POST['categorias'];
+    $id = $_POST['id'];
+    $consulta = "DELETE FROM pro_mujer WHERE id = $id";
+    mysqli_query($conexion, $consulta);
+    header("Location: ../views/usuarios/");
 
-    
-    // Determinar la tabla en función de la categoría proporcionada
-    $tabla = '';
-    switch ($categorias) {
-        case 'Mujer':
-            $tabla = 'pro_mujer';
-            break;
-        case 'Hombre':
-            $tabla = 'pro_hombre';
-            break;
-        case 'Niños':
-            $tabla = 'pro_niño';
-            break;
-        default:
-            // Puedes manejar un caso por defecto si la categoría no es ninguna de las anteriores
-            break;
-    }
 
-    if (!empty($tabla)) {
-        $consulta = "DELETE FROM $tabla WHERE id = $id";
-        mysqli_query($conexion, $consulta);
-        header("Location: ../views/usuarios/");
-    } else {
-        // Aquí puedes manejar un caso en el que la categoría no sea válida
-        echo "Categoría no válida.";
-    }
+
+    // global $conexion;
+    // extract($_POST);
+
+    // $categorias = $_POST['categorias'];
+
+
+    // // Determinar la tabla en función de la categoría proporcionada
+    // $tabla = '';
+    // switch ($categorias) {
+    //     case 'Mujer':
+    //         $tabla = 'pro_mujer';
+    //         break;
+    //     case 'Hombre':
+    //         $tabla = 'pro_hombre';
+    //         break;
+    //     case 'Niños':
+    //         $tabla = 'pro_niño';
+    //         break;
+    //     default:
+    //         // Puedes manejar un caso por defecto si la categoría no es ninguna de las anteriores
+    //         break;
+    // }
+
+    // if (!empty($tabla)) {
+    //     $consulta = "DELETE FROM $tabla WHERE id = $id";
+    //     mysqli_query($conexion, $consulta);
+    //     header("Location: ../views/usuarios/");
+    // } else {
+    //     // Aquí puedes manejar un caso en el que la categoría no sea válida
+    //     echo "Categoría no válida.";
+    // }
+}
+
+function eliminar_pro_hombre(){
+
+    global $conexion;
+    extract($_POST);
+    $id = $_POST['id'];
+    $consulta = "DELETE FROM pro_hombre WHERE id = $id";
+    mysqli_query($conexion, $consulta);
+    header("Location: ../views/usuarios/");
+}
+
+
+function eliminar_pro_niño(){
+
+    global $conexion;
+    extract($_POST);
+    $id = $_POST['id'];
+    $consulta = "DELETE FROM pro_niño WHERE id = $id";
+    mysqli_query($conexion, $consulta);
+    header("Location: ../views/usuarios/");
 }
 
 ?>

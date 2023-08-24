@@ -170,7 +170,7 @@ if ($row['cantidad'] <= $row['cantidad_min']) {
     </div>
   </a>
   <a>|</a>
-  <a href="producto_eliminar.php?id=<?php echo $row['id']?>">
+  <a href="producto_eliminar_hombre.php?id=<?php echo $row['id']?>">
     <div">
     Eliminar
     </div>
@@ -248,7 +248,7 @@ if ($row['cantidad'] <= $row['cantidad_min']) {
     </div>
   </a>
   <a>|</a>
-  <a href="producto_eliminar.php?id=<?php echo $row['id']?>">
+  <a href="producto_eliminar_niño.php?id=<?php echo $row['id']?>">
     <div">
     Eliminar
     </div>

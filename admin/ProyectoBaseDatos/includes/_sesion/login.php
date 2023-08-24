@@ -32,15 +32,20 @@
                                 <input type="submit"class="btn btn-success btn-md space" value="ingresar">
                                 <div id="register-link" class="text-right">
                                     <br>
-                                    <!-- <div>
+                                    <div>
                                     <a href="registros.php"><input type="button"  class="btn btn-primary space" value="registrarse"></a>
-                                    </div> -->
+                                    </div><br><br><br>
+                                    <div>
+                            <a href="../../../../login.php"><input type="button"  class="btn btn-danger space" value="Login de usuarios"></a>
+                        </div>
+
                                 
                                     <br>
                                 
                             </div>
                             </div>
                         </form>
+                        
                     </div>
                 </div>
             </div>
