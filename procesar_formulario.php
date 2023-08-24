@@ -11,18 +11,8 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-// Recoge los datos del formulario
-$nombre = $_POST['nombre'];
-$apellidos = $_POST['apellidos'];
-$direccion = $_POST['direccion'];
-$correo = $_POST['correo'];
-$numero_cuenta = $_POST['numero_cuenta'];
-$fecha_vencimiento = $_POST['fecha_vencimiento'];
-$titular = $_POST['titular'];
-
 // Inserta los datos en la tabla "pagos"
-$sql = "INSERT INTO pagos (nombre, apellidos, direccion, correo, numero_cuenta, fecha_vencimiento, titular)
-        VALUES ('$nombre', '$apellidos', '$direccion', '$correo', '$numero_cuenta', '$fecha_vencimiento', '$titular')";
+$sql = "INSERT INTO `pagos` (`nombre`, `apellidos`, `direccion`, `correo`, `numero_cuenta`, `fecha_vencimiento`, `titular`) VALUES ('Pago Seguro', 'Pago Seguro', 'Pago Seguro', 'Pago Seguro', 'Paypal', 'Paypal', 'Paypal')";
 
 if ($conn->query($sql) === TRUE) {
     echo "";

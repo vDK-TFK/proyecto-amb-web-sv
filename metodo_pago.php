@@ -9,32 +9,41 @@
 <body>
     <h1 style="position: relative; left: 40%; ">Formulario de Pagos</h1>
     <div style="position:absolute; width: 500px; left: 680px">
-    <form method="post" action="procesar_formulario.php">
-        <label for="nombre">Nombre:</label>
-        <label for=""> </label>
-        <input type="text" class="form-control" id="nombre" name="nombre" required><br><br>
 
-        <label for="apellidos">Apellidos:</label>
-        <input type="text" class="form-control" id="apellidos" name="apellidos" required><br><br>
+    <script src="https://www.paypal.com/sdk/js?client-id=AWomThAFLGHDdh6jGA5p-YwwociTlZs9MbmEIvJdjvzsV3nL5GCLDFTY8EyQI7yBS0LYn-qC6dV4jofs=USD"></script>
 
-        <label for="direccion">Dirección:</label>
-        <input type="text" class="form-control" id="direccion" name="direccion" required><br><br>
+<!-- Configura un elemento de contenedor para el botón -->
+<div id="paypal-button-container"></div>
 
-        <label for="correo">Correo:</label>
-        <input type="email" class="form-control" id="correo" name="correo" required><br><br>
-
-        <label for="numero_cuenta">Número de Cuenta:</label>
-        <input type="text" class="form-control" id="numero_cuenta" name="numero_cuenta" required><br><br>
-
-        <label for="fecha_vencimiento">Fecha de Vencimiento:</label>
-        <input type="date" class="form-control" id="fecha_vencimiento" name="fecha_vencimiento" required><br><br>
-
-        <label for="titular">Titular:</label>
-        <input type="text" class="form-control" id="titular" name="titular" required><br><br>
-
-       <input type="submit" value="Enviar">
-    </form>
+<script>
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      // Aquí puedes personalizar la orden que se enviará a PayPal
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '', // Precio del freelancer seleccionado
+            currency_code: 'USD'
+          },
+          description: '' // Descripción del freelancer seleccionado
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      // Aquí puedes manejar el evento de aprobación del pago
+      return actions.order.capture().then(function(details) {
+        // Aquí puedes mostrar un mensaje de éxito o redirigir al usuario a una página de confirmación
+        alert('Pago completado con éxito. ID de transacción: ' + details.id);
+      });
+    },
+    onError: function(err) {
+      // Aquí puedes manejar los errores que ocurran durante el proceso de pago
+      console.log(err);
+      alert('Ha ocurrido un error durante el proceso de pago. Por favor, inténtalo de nuevo.');
+    }
+  }).render('#paypal-button-container');
+</script>
     </div>
-    
+   
 </body>
 </html>

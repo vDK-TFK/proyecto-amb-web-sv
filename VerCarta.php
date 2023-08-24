@@ -1,17 +1,34 @@
 <?php
+// Include the database configuration file
+include 'conexion.php';
 
-// session_start();
-require_once 'conexion.php';
-
-$_SESSION['sessCustomerID'] = 1;
-
-$query = $conexion->query("SELECT * FROM usuarios WHERE id = " . $_SESSION['sessCustomerID']);
-$custRow = $query->fetch_assoc();
-
-
-// initializ shopping cart class
+// Initialize the shopping cart class
 include 'La-carta.php';
 $cart = new Cart;
+
+// Redirect to home if cart is empty
+if ($cart->total_items() <= 0) {
+    header("Location: index.php");
+    exit;
+}
+
+if (isset($_SESSION['sessCustomerID'])) {
+    $customerID = $_SESSION['sessCustomerID'];
+
+    // Get customer details by customer ID
+    $query = $conexion->query("SELECT * FROM usuarios WHERE id = $customerID");
+    $custRow = $query->fetch_assoc();
+
+    // If the customer is not found, you can handle it accordingly, for example, redirecting to the login page.
+    if (!$custRow) {
+        header("Location: login.php"); // Change 'login.php' to the correct login page URL.
+        exit;
+    }
+} else {
+    // If the user is not logged in, you can handle it accordingly, for example, redirecting to the login page.
+    header("Location: login.php"); // Change 'login.php' to the correct login page URL.
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -145,9 +162,9 @@ $cart = new Cart;
                         ?>
                                 <tr>
                                     <td><?php echo $item["nombre"]; ?></td>
-                                    <td><?php echo '$' . $item["precio"] . ' COP'; ?></td>
+                                    <td><?php echo '$' . $item["precio"] . ' USD'; ?></td>
                                     <td><input type="number" class="form-control text-center" value="<?php echo $item["qty"]; ?>" onchange="updateCartItem(this, '<?php echo $item["rowid"]; ?>')"></td>
-                                    <td><?php echo '$' . $item["subtotal"] . ' COP'; ?></td>
+                                    <td><?php echo '$' . $item["subtotal"] . ' USD'; ?></td>
                                     <td>
                                         <a href="AccionCarta.php?action=removeCartItem&id=<?php echo $item["rowid"]; ?>" class="btn btn-danger" onclick="return confirm('Confirma eliminar?')"><i class="glyphicon glyphicon-trash"></i></a>
                                     </td>
@@ -165,7 +182,7 @@ $cart = new Cart;
                             <td><a href="index.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Volver a la tienda</a></td>
                             <td colspan="2"></td>
                             <?php if ($cart->total_items() > 0) { ?>
-                                <td class="text-center"><strong>Total <?php echo '$' . $cart->total() . ' COP'; ?></strong></td>
+                                <td class="text-center"><strong>Total <?php echo '$' . $cart->total() . ' USD'; ?></strong></td>
                                 <td><a href="Pagos.php" class="btn btn-success btn-block">Pagos <i class="glyphicon glyphicon-menu-right"></i></a></td>
                             <?php } ?>
                         </tr>

@@ -1,27 +1,36 @@
 <?php
-// include database configuration file
+// Include the database configuration file
 include 'conexion.php';
 
-$_SESSION['sessCustomerID'] = 1;
-
-$query = $conexion->query("SELECT * FROM usuarios WHERE id = " . $_SESSION['sessCustomerID']);
-$custRow = $query->fetch_assoc();
-
-// initializ shopping cart class
+// Initialize the shopping cart class
 include 'La-carta.php';
 $cart = new Cart;
 
-// redirect to home if cart is empty
+// Redirect to home if cart is empty
 if ($cart->total_items() <= 0) {
     header("Location: index.php");
+    exit;
 }
 
-// set customer ID in session
-// $_SESSION['sessCustomerID'] = 1;
-// // get customer details by session customer ID
-// $query = $conexion->query("SELECT * FROM clientes WHERE id = " . $_SESSION['sessCustomerID']);
-// $custRow = $query->fetch_assoc();
+if (isset($_SESSION['sessCustomerID'])) {
+    $customerID = $_SESSION['sessCustomerID'];
+
+    // Get customer details by customer ID
+    $query = $conexion->query("SELECT * FROM usuarios WHERE id = $customerID");
+    $custRow = $query->fetch_assoc();
+
+    // If the customer is not found, you can handle it accordingly, for example, redirecting to the login page.
+    if (!$custRow) {
+        header("Location: login.php"); // Change 'login.php' to the correct login page URL.
+        exit;
+    }
+} else {
+    // If the user is not logged in, you can handle it accordingly, for example, redirecting to the login page.
+    header("Location: login.php"); // Change 'login.php' to the correct login page URL.
+    exit;
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -151,9 +160,9 @@ if ($cart->total_items() <= 0) {
                         ?>
                                 <tr>
                                     <td><?php echo $item["nombre"]; ?></td>
-                                    <td><?php echo '$' . $item["precio"] . ' COP'; ?></td>
+                                    <td><?php echo '$' . $item["precio"] . ' USD'; ?></td>
                                     <td><?php echo $item["qty"]; ?></td>
-                                    <td><?php echo '$' . $item["subtotal"] . ' COP'; ?></td>
+                                    <td><?php echo '$' . $item["subtotal"] . ' USD'; ?></td>
                                 </tr>
                             <?php }
                         } else { ?>
@@ -167,7 +176,7 @@ if ($cart->total_items() <= 0) {
                         <tr>
                             <td colspan="3"></td>
                             <?php if ($cart->total_items() > 0) { ?>
-                                <td class="text-center"><strong>Total <?php echo '$' . $cart->total() . ' COP'; ?></strong></td>
+                                <td class="text-center"><strong>Total <?php echo '$' . $cart->total() . ' USD'; ?></strong></td>
                             <?php } ?>
                         </tr>
                     </tfoot>
@@ -181,7 +190,44 @@ if ($cart->total_items() <= 0) {
                 </div>
                 <div class="footBtn">
                     <a href="categorias.php" class="btn btn-warning"><i class="glyphicon glyphicon-menu-left"></i> Continue Comprando</a>
-                    <a href="metodo_pago.php" class="btn btn-success orderBtn">Realizar pedido <i class="glyphicon glyphicon-menu-right"></i></a>
+                    <script src="https://www.paypal.com/sdk/js?client-id=ARJaC63k7wGWEdvdTHtT-t9yNJixpmW48t0LQscaPloZ4Yx7jKf5Y7xmPrNq7BLb86U_8-PbtMEtZz0y&currency=USD"></script>
+
+<!-- Configura un elemento de contenedor para el botón -->
+<div id="paypal-button-container"></div>
+
+<script>
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      // Aquí puedes personalizar la orden que se enviará a PayPal
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: '<?php echo $cart->total(); ?>', // Total del carrito
+            currency_code: 'USD'
+          },
+          description: 'Compra en tu tienda en línea' // Descripción de la compra
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      // Aquí puedes manejar el evento de aprobación del pago
+      return actions.order.capture().then(function(details) {
+        // Aquí puedes mostrar un mensaje de éxito o redirigir al usuario a una página de confirmación
+        alert('Pago completado con éxito. ID de transacción: ' + details.id);
+        
+        // Redirige al usuario a la página de confirmación con los detalles de la orden
+        window.location.href = 'procesar_formulario.php?order_id=' + details.id + '&payment_success=true';
+      });
+    },
+    onError: function(err) {
+      // Aquí puedes manejar los errores que ocurran durante el proceso de pago
+      console.log(err);
+      alert('Ha ocurrido un error durante el proceso de pago. Por favor, inténtalo de nuevo.');
+    }
+  }).render('#paypal-button-container');
+</script>
+
+</script>
                 </div>
             </div>
             

@@ -23,6 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $result->fetch_assoc();
         if (password_verify($password, $user['password'])) {
             // Inicio de sesión exitoso para usuarios normales
+            session_start();
+            $_SESSION['sessCustomerID'] = $user['id']; // Configura la ID del usuario autenticado en la sesión
             header('Location: index.php');
             exit;
         } else {
@@ -35,6 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($result_admin->num_rows === 1) {
             // Inicio de sesión exitoso para administradores
+            session_start();
+            $_SESSION['sessCustomerID'] = 'admin'; // Configura una identificación especial para administradores, si es necesario
             header('Location: admin/ProyectoBaseDatos/index.php');
             exit;
         } else {
@@ -43,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html>

@@ -1,10 +1,28 @@
 <?php
-
+$credenciales_validas = false;
 session_start();
 require_once 'conexion.php';
 
-$_SESSION['sessCustomerID'] = 1;
+// Supongamos que has verificado las credenciales del usuario y has obtenido su ID correctamente.
+if ($credenciales_validas) {
+    // Obtener la ID del usuario desde la base de datos (reemplaza 'tu_tabla' y 'tu_columna_id' con los nombres correctos).
+    $sql = "SELECT id FROM usuarios WHERE correo = '$correo'";
+    $result = $conexion->query($sql);
 
+    if ($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+        $id_del_usuario = $row['id'];
+
+        // Establecer la ID del usuario autenticado en la sesión.
+        $_SESSION['sessCustomerID'] = $id_del_usuario;
+    } else {
+        // Tratar la autenticación fallida aquí, redirigir al usuario a la página de inicio de sesión, por ejemplo.
+    }
+} else {
+    // Tratar la autenticación fallida aquí, redirigir al usuario a la página de inicio de sesión, por ejemplo.
+}
+
+// Ahora puedes usar $_SESSION['sessCustomerID'] en tus consultas como lo estás haciendo en tu código actual.
 $query = $conexion->query("SELECT * FROM usuarios WHERE id = " . $_SESSION['sessCustomerID']);
 $custRow = $query->fetch_assoc();
 
@@ -49,7 +67,7 @@ $custRow = $query->fetch_assoc();
               
             </div>
             <div class="icon d-flex">
-            <i class='bx bx-exit'><a href="login.php">logout</a></i>
+            <i class='bx bx-exit'><a href="logout.php">logout</a></i>
             </div>
           </div>
 
@@ -102,13 +120,6 @@ $custRow = $query->fetch_assoc();
                   <h4>Ropa para Bebe </h4>
                   <div class="d-flex">
                     <!-- <div class="price">Ver mas</div> -->
-                    <div class="rating">
-                      <i class="bx bxs-star"></i>
-                      <i class="bx bxs-star"></i>
-                      <i class="bx bxs-star"></i>
-                      <i class="bx bxs-star"></i>
-                      <i class="bx bxs-star"></i>
-                    </div>
                   </div>
                 </div>
               </div> 
@@ -135,13 +146,6 @@ $custRow = $query->fetch_assoc();
                   <h4>Ropa para Mujer </h4>
                   <div class="d-flex">
                     <!-- <div class="price">Ver mas</div> -->
-                    <div class="rating">
-                      <i class="bx bxs-star"></i>
-                      <i class="bx bxs-star"></i>
-                      <i class="bx bxs-star"></i>
-                      <i class="bx bxs-star"></i>
-                      <i class="bx bxs-star"></i>
-                    </div>
                   </div>
                 </div>
               </div> 
@@ -168,13 +172,6 @@ $custRow = $query->fetch_assoc();
                   <h4>Ropa para Hombre </h4>
                   <div class="d-flex">
                     <!-- <div class="price"> <a href="categorias.html">Ver mas</a></div> -->
-                    <div class="rating">
-                      <i class="bx bxs-star"></i>
-                      <i class="bx bxs-star"></i>
-                      <i class="bx bxs-star"></i>
-                      <i class="bx bxs-star"></i>
-                      <i class="bx bxs-star"></i>
-                    </div>
                   </div>
                 </div>
               </div> 
@@ -186,78 +183,6 @@ $custRow = $query->fetch_assoc();
         </div>
       </div>
     </section>
-
-    <!-- ====== New Arrival ====== -->
-    <!-- <section class="section new-arrival">
-      <div class="title">
-        <span>NUEVA LLEGADA</span>
-        <h2>Ultima Coleccion</h2>
-      </div>
-
-      <div class="row container">
-        <div class="col col-1">
-          <img src="./images/poster-1.png" alt="" />
-          <h3>
-            Tendencias 2023 <br />
-            Falda elegante para mujer
-          </h3>
-        </div>
-        <div class="col col-2">
-          <img src="./images/poster-2.png" alt="" />
-          <h3>
-            Tendencias 2023 <br />
-            Falda elegante para mujer
-          </h3>
-        </div>
-        <div class="col col-3">
-          <img src="./images/poster-3.png" alt="" />
-          <h3>
-            Tendencias 2023 <br />
-            Camisa elegante de mujer <br />
-            <span>Descubrir más:</span>
-          </h3>
-        </div>
-      </div>
-    </section> -->
-
-    <!-- ====== Categories ====== -->
-    <!-- <section class="section categories">
-      <div class="title">
-        <span>CATALOGO</span>
-        <h2>2023 última colección</h2>
-      </div>
-
-      <div class="products container">
-        <div class="product">
-          <div class="top d-flex">
-            <img src="./images/Mujer1.png" alt="" />
-            <div class="icon d-flex">
-              <i class="bx bxs-heart"></i>
-            </div>
-          </div>
-          <div class="bottom">
-            <div class="d-flex">
-              <h4>Vestido de mujer blanco con lazo al frente</h4>
-              <a href="" class="btn cart-btn">Agregar al carrito</a>
-            </div>
-            <div class="d-flex">
-              <div class="price">Ver mas</div>
-              <div class="rating">
-                <i class="bx bxs-star"></i>
-                <i class="bx bxs-star"></i>
-                <i class="bx bxs-star"></i>
-                <i class="bx bxs-star"></i>
-                <i class="bx bxs-star"></i>
-              </div>
-            </div>
-          </div>
-        </div> 
-      </div>
-
-      <div class="button d-flex">
-        <a class="btn loadmore">Cargar más</a>
-      </div>
-    </section> -->
 
     <!-- ====== Statistics ====== -->
     <section class="section statistics">
@@ -297,6 +222,52 @@ $custRow = $query->fetch_assoc();
         </div>
       </div>
     </section>
+
+  <!-- Sección para mostrar los comentarios -->
+<section class="section comments">
+    <div class="title">
+        <span>Comentarios</span>
+        <h2>Lo que dicen nuestros clientes</h2>
+    </div>
+    
+    <!-- Contenedor de comentarios -->
+    <div class="comment-container">
+        <?php
+        // Conexión a la base de datos (mismo código que antes)
+        // Consulta para obtener los últimos 5 comentarios almacenados
+        $comentariosSql = "SELECT nombre, comentario, fecha FROM comentarios ORDER BY fecha DESC LIMIT 5";
+        $comentariosResult = $conexion->query($comentariosSql);
+        
+        if ($comentariosResult->num_rows > 0) {
+            while ($row = $comentariosResult->fetch_assoc()) {
+                echo '<div class="comment">';
+                echo '<div class="user">';
+                echo '<h4>' . $row['nombre'] . '</h4>';
+                echo '</div>';
+                echo '<p>' . $row['comentario'] . '</p>';
+                echo '<p class="date">' . $row['fecha'] . '</p>';
+                echo '</div>';
+            }
+        } else {
+            echo 'No hay comentarios aún.';
+        }
+        
+        // Cierra la conexión a la base de datos
+        $conexion->close();
+        ?>
+    </div>
+
+    <!-- Formulario de comentarios -->
+    <form action="../proyecto1/funcionaliades/comentarios.php" method="POST">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" value="<?php echo $custRow['usuario']; ?>" readonly required>
+        
+        <label for="comentario">Comentario:</label>
+        <textarea name="comentario" rows="4" required></textarea>
+        
+        <button type="submit">Enviar Comentario</button>
+    </form>
+</section>
 
     <!-- ====== Footer ====== -->
     <footer class="footer">
@@ -361,77 +332,18 @@ $custRow = $query->fetch_assoc();
       </div>
     </footer>
 
-    <!-- ====== Login and Signup Form ====== -->
-    <div class="user-form">
-      <div class="close-form d-flex"><i class="bx bx-x"></i></div>
-      <div class="form-wrapper container">
-        <div class="user login">
-          <div class="img-box">
-            <img src="./images/login.svg" alt="" />
-          </div>
-          <div class="form-box">
-            <div class="top">
-              <p>
-                No eres miembro?
-                <span data-id="#ff0066">Registrate aqui</span>
-              </p>
-            </div>
-            <form action="">
-              <div class="form-control">
-                <h2>Hola de nuevo!</h2>
-                <p>Bienvenido de nuevo se te ha extrañado.</p>
-                <input type="text" placeholder="Ingresa tu usuario" />
-                <div>
-                  <input type="password" placeholder="Contraseña" />
-                  <div class="icon form-icon">
-                    <!-- <img src="./images/eye.svg" alt="" /> -->
-                  </div>
-                </div>
-                <span>Recuperar contraseña</span>
-                <input type="Submit" value="Login" />
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <!-- Register -->
-        <div class="user signup">
-          <div class="form-box">
-            <div class="top">
-              <p>
-                Ya eres miembro?
-                <span data-id="#1a1aff">Entra aqui</span>
-              </p>
-            </div>
-            <form action="">
-              <div class="form-control">
-                <h2>Bienvenido a Sincronias!</h2>
-                <p>Es bueno tenerte..</p>
-                <input type="email" placeholder="Ingresa un correo" />
-                <div>
-                  <input type="password" placeholder="Contraseña" />
-                  <div class="icon form-icon">
-                    <img src="./images/eye.svg" alt="" />
-                  </div>
-                </div>
-                <div>
-                  <input type="password" placeholder="Confirmar Contraseña" />
-                  <div class="icon form-icon">
-                    <img src="./images/eye.svg" alt="" />
-                  </div>
-                </div>
-                <input type="Submit" value="Registrarse" />
-              </div>
-            </form>
-          </div>
-          <div class="img-box">
-            <img src="./images/trial.svg" alt="" />
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- ====== SwiperJs ====== -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+    // Función para desplazar automáticamente los comentarios hacia la derecha
+    function scrollComments() {
+        const commentContainer = document.querySelector('.comment-container');
+        commentContainer.scrollLeft += 220; // Ajusta la cantidad de desplazamiento según el ancho de las tarjetas
+    }
+
+    // Llama a la función de desplazamiento cada cierto tiempo (por ejemplo, cada 5 segundos)
+    setInterval(scrollComments, 5000); // Ajusta el tiempo según tus preferencias
+</script>
 
     <!-- ====== Custom Script ====== -->
     <script src="./js/product.js"></script>

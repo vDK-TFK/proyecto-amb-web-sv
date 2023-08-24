@@ -1,16 +1,33 @@
 <?php
-
+$credenciales_validas = false;
 session_start();
 require_once 'conexion.php';
 
-$_SESSION['sessCustomerID'] = 1;
+// Supongamos que has verificado las credenciales del usuario y has obtenido su ID correctamente.
+if ($credenciales_validas) {
+    // Obtener la ID del usuario desde la base de datos (reemplaza 'tu_tabla' y 'tu_columna_id' con los nombres correctos).
+    $sql = "SELECT id FROM usuarios WHERE correo = '$correo'";
+    $result = $conexion->query($sql);
 
+    if ($result->num_rows == 1) {
+        $row = $result->fetch_assoc();
+        $id_del_usuario = $row['id'];
+
+        // Establecer la ID del usuario autenticado en la sesión.
+        $_SESSION['sessCustomerID'] = $id_del_usuario;
+    } else {
+        // Tratar la autenticación fallida aquí, redirigir al usuario a la página de inicio de sesión, por ejemplo.
+    }
+} else {
+    // Tratar la autenticación fallida aquí, redirigir al usuario a la página de inicio de sesión, por ejemplo.
+}
+
+// Ahora puedes usar $_SESSION['sessCustomerID'] en tus consultas como lo estás haciendo en tu código actual.
 $query = $conexion->query("SELECT * FROM usuarios WHERE id = " . $_SESSION['sessCustomerID']);
 $custRow = $query->fetch_assoc();
 
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
