@@ -28,7 +28,7 @@ $productos = mysqli_fetch_assoc($resultado);
 
 <div class="col-sm-6">
 <div class="mb-3">
-<label for="descripcion" class="form-label">Productos *</label>
+<label for="descripcion" class="form-label">Ubicacion *</label>
 <input type="text"  id="ubicacion" name="ubicacion" value="<?php echo $productos ['ubicacion']; ?>" class="form-control" required>
 </div>
 </div>
@@ -37,14 +37,14 @@ $productos = mysqli_fetch_assoc($resultado);
 <div class="row">
 <div class="col-sm-6">
 <div class="mb-3">
-<label for="color" class="form-label">Empresa *</label>
+<label for="color" class="form-label">Productos *</label>
 <input type="text"  id="productos" name="productos" value="<?php echo $productos ['productos']; ?>"  class="form-control" required>
 </div>
 </div>
 
 <div class="col-sm-6">
 <div class="mb-3">
-<label for="precio" class="form-label">Precio *</label>
+<label for="precio" class="form-label">Cantidad *</label>
 <input type="number"  id="cantidad" name="cantidad"  value="<?php echo $productos ['cantidad']; ?>" class="form-control" required>
 </div>
 </div>

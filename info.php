@@ -16,10 +16,10 @@ if ($credenciales_validas) {
         // Establecer la ID del usuario autenticado en la sesión.
         $_SESSION['sessCustomerID'] = $id_del_usuario;
     } else {
-      header('Location: login.php');
+      // header('Location: login.php');
     }
 } else {
-  header('Location: login.php');
+  // header('Location: login.php');
 }
 
 // Ahora puedes usar $_SESSION['sessCustomerID'] en tus consultas como lo estás haciendo en tu código actual.
@@ -38,6 +38,8 @@ $custRow = $query->fetch_assoc();
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/estilos.css">
+    <script src="https://kit.fontawesome.com/eb496ab1a0.js" crossorigin="anonymous"></script>
     <title>Sincronias</title>
   </head>
   <body>
@@ -91,6 +93,22 @@ $custRow = $query->fetch_assoc();
             
       </div>
     </header>
+
+    <div class="comentario-form">
+        <div class="info-form">
+            <h2>Contáctanos</h2>
+            <p>Dejanos tus criticas y comentarios para seguir mejorando y creciendo para nuestros clientes.</p>
+            <a href="#"><i class="fa fa-phone"></i> +506 2978 9001</a>
+            <a href="#"><i class="fa fa-envelope"></i> email@tudominio.com</a>
+            <a href="#"><i class="fa fa-map-marked"></i> San Jose, Costa Rica</a>
+        </div>
+        <form action="comment.php" method="post" autocomplete="off">
+            <input type="text" name="usuario" placeholder="Tu Nombre" class="campo">
+            <input type="emal" name="email" placeholder="Tu Email" class="campo">
+            <textarea name="mensaje" placeholder="Tu Mensaje..."></textarea>
+            <input type="submit" value="Enviar Mensaje" class="btn-enviar">
+        </form>
+    </div>
 
     <!-- ====== Footer ====== -->
     <footer class="footer">
@@ -154,3 +172,5 @@ $custRow = $query->fetch_assoc();
           </div>
         </div>
       </footer>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

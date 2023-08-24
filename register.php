@@ -25,6 +25,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
 <div class="container">
     <?php if (!empty($mensajeExito)) : ?>
         <div class="alert alert-success" role="alert">
@@ -38,5 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     <?php endif; ?>
 
-    <a href="login.php" class="btn btn-secondary">Volver al login</a>
+    <a href="login.php" ><button class="btn btn-success orderBtn">Volver al login</button></a>
 </div>
+</body>
+</html>
